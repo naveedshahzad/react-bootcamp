@@ -5,37 +5,40 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
   <body>
     <div id='app'>Eyo</div>
-    <script type='text/babel'>
-      const name = 'Tyler';
-      const handle = '@tylermcginnis';
-
-
-      function NameComponent(props){
-        return <h1>{props.name}</h1>
+    <script type='text/javascript'>
+      function Avatar(props) {
+        return React.createElement('img', { src: props.img })
       }
 
-      function HandleComponent(props){
-        return <h3>{props.handle}</h3>
+      function Label(props) {
+        return React.createElement('h1', null, 'Name: ', props.name)
       }
 
-      function App(){
-        return (
-          <div id='container'>
-            <NameComponent name={name} />
-            <HandleComponent handle={handle} />
-          </div>
+      function ScreenName(props) {
+        return React.createElement('h3', null, 'Username: ', props.username)
+      }
+
+      function Badge(props) {
+        const user = props.user;
+        return React.createElement(
+          'div',
+          null,
+          React.createElement(Avatar, { img: user.img }),
+          React.createElement(Label, { name: user.name }),
+          React.createElement(ScreenName, { username: user.username }),
         )
       }
 
-
-      ReactDOM.render(
-        <App />,
+      ReactDOM.render(React.createElement(Badge, { user: {
+          name: 'Tyler McGinnis',
+          img: 'https://avatars0.githubusercontent.com/u/2933430?v=3&s=460',
+          username: 'tylermcginnis'
+        } }),
         document.getElementById('app')
-      );
+      )
     </script>
   </body>
 </html>
