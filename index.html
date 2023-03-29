@@ -5,38 +5,36 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
   </head>
   <body>
     <div id='app'>Eyo</div>
-    <script type='text/javascript'>
-      function Avatar(props) {
-        return React.createElement('img', { src: props.img })
-      }
-
-      function Label(props) {
-        return React.createElement('h1', null, 'Name: ', props.name)
-      }
-
-      function ScreenName(props) {
-        return React.createElement('h3', null, 'Username: ', props.username)
-      }
-
-      function Badge(props) {
-        const user = props.user;
-        return React.createElement(
-          'div',
-          null,
-          React.createElement(Avatar, { img: user.img }),
-          React.createElement(Label, { name: user.name }),
-          React.createElement(ScreenName, { username: user.username }),
+    <script type='text/babel'>
+      function FriendsList(props){
+        return (
+          <ul>
+            {props.list.map((name) => (
+              <li key={name}>
+                {name}
+              </li>
+            ))}
+          </ul>
         )
       }
 
-      ReactDOM.render(React.createElement(Badge, { user: {
-          name: 'Tyler McGinnis',
-          img: 'https://avatars0.githubusercontent.com/u/2933430?v=3&s=460',
-          username: 'tylermcginnis'
-        } }),
+      function App(props) {
+        const friends = ['Jordyn', 'Mikenzi', 'Jake'];
+
+        return (
+          <div>
+            <FriendsList list={friends} />
+          </div>
+        )
+      }
+
+      ReactDOM.render(
+        <App name='Tyler' />,
         document.getElementById('app')
       )
     </script>
